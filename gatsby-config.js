@@ -7,13 +7,29 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
+      // The name of the plugin
+      resolve: 'gatsby-source-mongodb',
+      options: {
+          // Name of the database and collection where are books reside
+          dbName: 'gatsby',
+          collection: 'book',
+          connectionString: "mongodb+srv://kelvinsekx:kukuejubola%401997@cluster0-slvss.mongodb.net/",
+            //...mongodb+srv://kelvinsekx:<password>@cluster0-slvss.mongodb.net/<dbname>?retryWrites=true&w=majority
+          extraParams: {
+              retryWrites: true,
+              w: 'majority'
+          }
+      }
+  },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `content`,
+        path: `${__dirname}/src/content`,
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
